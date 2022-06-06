@@ -6,7 +6,7 @@ public:
         
         int curr_sum = 0;
         int max_sum = 0;
-        int le = INT_MIN;
+        int le = INT_MIN;   //for all negatives
         
         for(int i=0; i<nums.size(); i++) {
             
