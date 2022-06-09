@@ -12,7 +12,6 @@ public:
             
             if(nums[low] + nums[high] < target)
                 low++;
-            
             else
                 high--;
         }
