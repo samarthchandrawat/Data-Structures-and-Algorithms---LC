@@ -6,9 +6,6 @@ public:
         
         int n = word2.size();
         
-        if(word1 == word2)
-            return 0;
-        
         int dp[m+1][n+1];
         
         for(int i=0; i<=m; i++) {
