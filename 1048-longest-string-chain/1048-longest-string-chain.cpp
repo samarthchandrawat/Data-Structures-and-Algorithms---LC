@@ -8,29 +8,24 @@ public:
     
     int longestStrChain(vector<string>& words) {
         
-        unordered_map<string, int> mx_chain;
+        unordered_map<string, int> dp;
         
         int res = 0;
-        
-        for(string s: words) {
-            
-            mx_chain[s]++;
-        }
         
         sort(words.begin(), words.end(), len_comp);
         
         for(int i=0; i<words.size(); i++) {
             
-            int mx_yet = 0;
+            int max_reducing_one_char = 0;
             
-            for(int j=0; words[i].size()>1 && j<words[i].size(); j++) {
+            for(int j=0; j<words[i].size(); j++) {
                 
-                mx_yet = max(mx_yet, mx_chain[ words[i].substr(0,j) + words[i].substr(j+1, (words[i].length() - j -1)) ]);
+                max_reducing_one_char =  dp[ words[i].substr(0,j) + words[i].substr(j+1) ];
+            
+                dp[words[i]] = max(dp[words[i]], 1 + max_reducing_one_char);
+            
+                res = max(res, dp[words[i]]);
             }
-            
-            mx_chain[words[i]] = 1 + mx_yet;
-            
-            res = max(res, mx_chain[words[i]]);
         }
         
         return res;
