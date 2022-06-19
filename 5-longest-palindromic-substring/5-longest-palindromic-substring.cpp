@@ -7,7 +7,6 @@ public:
         vector<vector<int>> dp(n, vector<int>(n, 0));
         
         int res_x = 0;
-        int res_y = 0;
         
         int res_len = 1;
         
@@ -20,7 +19,6 @@ public:
                 dp[i][i+1] = 1;
                 
                 res_x = i;
-                res_y = i+1;
                 
                 res_len = 2;
                 
@@ -47,7 +45,6 @@ public:
                 if(dp[i][i+size-1]==1 && size>res_len) {
 
                     res_x = i;
-                    res_y = i+size-1;
 
                     res_len = size;
                 }
@@ -57,7 +54,7 @@ public:
             
         }
         
-        return s.substr(res_x, res_y - res_x + 1);
+        return s.substr(res_x, res_len);
         
     }
 };
