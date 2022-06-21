@@ -10,77 +10,27 @@
  */
 class Solution {
 public:
-    
-    void rec_helper(ListNode* list1, ListNode* list2, ListNode* res) {
-        
-        if(list1 == NULL) {
-            
-            while(list2 !=NULL) {
-                
-                res->next = new ListNode(list2->val);
-                res = res->next;
-                list2 = list2->next;
-            }
-            
-            return;
-        }
-        
-        if(list2 == NULL) {
-            
-            while(list1 !=NULL) {
-                
-                res->next = new ListNode(list1->val);
-                res = res->next;
-                list1 = list1->next;
-            }
-            return;
-        }
-        
-        
-        if(list1->val < list2->val) {
-            
-            if(res->val == -101) {
-                
-                res->val = list1->val;
-            } else {
-                
-                res->next = new ListNode(list1->val);
-                res = res->next;
-            }
-            
-            rec_helper(list1->next, list2, res);
-            return;
-        } else {
-            
-            if(res->val == -101) {
-                
-                res->val = list2->val;
-            } else {
-                
-                res->next = new ListNode(list2->val);
-                res = res->next;
-            }
-            rec_helper(list1, list2->next, res);
-            return;
-        }
-        
-    }
-    
     ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
         
-        ListNode* temp = new ListNode(-101);
-        
-        ListNode* res = temp;
-        
         if(list1 == NULL) {
+            
             return list2;
         }
         
         if(list2 == NULL) {
+            
             return list1;
         }
-        rec_helper(list1, list2, temp);
         
-        return res;
+        if(list1->val < list2->val) {
+            
+            list1->next = mergeTwoLists(list1->next, list2);
+            return list1;
+        } else {
+            
+            list2->next = mergeTwoLists(list1, list2->next);
+            return list2;
+        }
+        
     }
 };
