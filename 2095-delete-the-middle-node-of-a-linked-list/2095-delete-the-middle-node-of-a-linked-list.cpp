@@ -16,31 +16,28 @@ public:
             return NULL;
         }
         
-        int size = 0;
+        ListNode* fast = head;
+        ListNode* slow = head;
+        ListNode* prev = head;
         
-        ListNode* temp = head;
+        int count = 1;
         
-        while(temp != NULL) {
+        while(fast!= NULL) {
             
-            size++;
-            temp = temp->next;
+            fast = fast->next;
+            
+            if(count%2 == 0) {
+                
+                prev = slow;
+                slow = slow->next;
+            }
+            
+            count++;
         }
         
-        int jumps = (size/2) -1;
-        
-        temp = head;
-        
-        while(jumps--) {
-            
-            temp = temp->next;
-        }
-        
-        ListNode* to_delete = temp->next;
-        
-        temp->next = temp->next->next;
-        
-        delete to_delete;
-        to_delete = NULL;
+        prev->next = prev->next->next;
+        delete slow;
+        slow = NULL;
         
         return head;
     }
