@@ -16,21 +16,13 @@ public:
             return NULL;
         }
         
-        ListNode* fast = head->next;
+        ListNode* fast = head->next->next;
         ListNode* slow = head;
         
-        int count = 0;
-        
-        while(fast->next!= NULL) {
+        while(fast != NULL && fast->next != NULL) {
             
-            fast = fast->next;
-            
-            count++;
-            
-            if(count%2 == 0) {
-                
-                slow = slow->next;
-            }
+            fast = fast->next->next;
+            slow = slow->next;
         }
 
         slow->next = slow->next->next;
