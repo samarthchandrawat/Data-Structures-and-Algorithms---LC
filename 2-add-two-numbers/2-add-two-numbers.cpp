@@ -17,41 +17,33 @@ public:
         
         int carry = 0;
         
-        while(l1!=NULL && l2!=NULL) {
+        while(l1!=NULL || l2!=NULL) {
             
-            int temp = l1->val + l2->val + carry;
+            int temp = 0;
+            
+            if(l1 != NULL) {
+                
+                temp = l1->val;    
+            }
+            
+            if(l2 != NULL) {
+                
+                temp += l2->val;
+            }
+            
+            temp += carry;
             int v = temp%10;
             carry = temp/10;
             
             res->next = new ListNode(v);
             res = res->next;
             
-            l1 = l1->next;
-            l2 = l2->next;
-        }
-        
-        while(l1 != NULL) {
             
-            int temp = l1->val + carry;
-            int v = temp%10;
-            carry = temp/10;
+            if(l1 != NULL)
+                l1 = l1->next;
             
-            res->next = new ListNode(v);
-            res = res->next;
-            
-            l1 = l1->next;
-        }
-        
-        while(l2 != NULL) {
-            
-            int temp = l2->val + carry;
-            int v = temp%10;
-            carry = temp/10;
-            
-            res->next = new ListNode(v);
-            res = res->next;
-            
-            l2 = l2->next;
+            if(l2 !=NULL)
+                l2 = l2->next;
         }
         
         if(carry != 0) {
