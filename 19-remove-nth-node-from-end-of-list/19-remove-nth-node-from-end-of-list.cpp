@@ -17,18 +17,16 @@ public:
             return NULL;
         }
         
-        ListNode* fast = head;
-        ListNode* slow = head;
+        ListNode* start = new ListNode(0);
+        
+        ListNode* fast = start;
+        ListNode* slow = start;
+        start->next = head;
         
         
         while(n--) {
             
             fast = fast->next;
-        }
-        
-        if(fast == NULL) {
-            
-            return slow->next;
         }
         
         while(fast->next != NULL) {
@@ -44,6 +42,6 @@ public:
         delete to_delete;
         to_delete = NULL;
         
-        return head;
+        return start->next;
     }
 };
