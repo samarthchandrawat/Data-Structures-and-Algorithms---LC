@@ -12,9 +12,9 @@ class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
         
-        ListNode* start = new ListNode(0, head);
+        ListNode* res = new ListNode(0, head);
         
-        ListNode* res = start;
+        ListNode* start = res;
         
         while(head != NULL) {
             
