@@ -24,25 +24,19 @@ public:
         }
         
         k = k % size;
-        int jumps = size - k -1;
         
-        ListNode* temp = head;
+        if(k==0)
+            return head;
         
-        while(jumps--) {
+        tail->next = head;
+        
+        for(int i=0; i<size-k-1; i++) {
             
-            temp = temp->next;
+            head = head->next;
         }
         
-        ListNode* res = head;
-
-        if( k>0 ) {
-            
-            res = temp->next;
-
-            temp->next = NULL;
-
-            tail->next = head;
-        }
+        ListNode* res = head->next;
+        head->next = NULL;
         
         return res;
     }
