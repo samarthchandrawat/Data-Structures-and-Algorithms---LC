@@ -1,13 +1,8 @@
-class MyStack {
-    
-public:
+class MyStack {  
     
     queue<int> q1, q2;
     
-    
-//     MyStack() {
-        
-//     }
+public:
     
     void push(int x) {
            
@@ -61,43 +56,17 @@ public:
     
     int top() {
         
+        int top = this->pop();
+        
         if(q1.empty()) {
             
-            while(!q2.empty()) {
-                
-                if(q2.size() == 1) {
-                    
-                    int top = q2.front();
-                    q1.push(q2.front());
-                    q2.pop();
-                    return top;
-                } else {
-                    
-                    q1.push(q2.front());
-                    q2.pop();
-                }
-                
-            }
+            q2.push(top);
         } else {
             
-            while(!q1.empty()) {
-                
-                if(q1.size() == 1) {
-                    
-                    int top = q1.front();
-                    q2.push(q1.front());
-                    q1.pop();
-                    return top;
-                } else {
-                    
-                    q2.push(q1.front());
-                    q1.pop();
-                }
-                
-            }
+            q1.push(top);
         }
         
-        return -1;
+        return top;
     }
     
     bool empty() {
