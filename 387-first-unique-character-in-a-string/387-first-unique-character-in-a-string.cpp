@@ -7,8 +7,6 @@ public:
         
         int res = -1;
         
-        int res_char = -1;
-        
         for(int i=0; i<s.length(); i++) {
             
             chars_hash[s[i]-'a']++;
