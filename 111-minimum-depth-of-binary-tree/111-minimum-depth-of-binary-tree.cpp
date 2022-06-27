@@ -20,8 +20,8 @@ public:
         if(root->left==NULL && root->right==NULL)
             return 1;
         
-        int h1 = 9999;
-        int h2 = 9999;
+        int h1 = 9999999;
+        int h2 = 9999999;
         
         if(root->left != NULL) {
             
