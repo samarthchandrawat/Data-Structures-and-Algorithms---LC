@@ -32,11 +32,29 @@ class Solution
         return dp[w][n] = max(exc, inc);
     }
     
-    int knapSack(int W, int wt[], int val[], int n) 
+    int knapSack(int w, int wt[], int val[], int n) 
     { 
        // Your code here
-        vector<vector<int>> dp(W+1, vector<int>(n+1, -1));
-        return helper(W, n, wt, val, dp);
+        vector<vector<int>> dp(n+1, vector<int>(w+1, 0));
+        for(int i=1; i<=n; i++) {
+            
+            for(int j=1; j<=w; j++) {
+                
+                int inc = 0;
+                int exc = 0;
+                
+                if(j - wt[i-1] >= 0) {
+                    
+                    inc = dp[i-1][j - wt[i-1]] + val[i-1];    
+                }
+                
+                exc = dp[i-1][j];
+                
+                dp[i][j] = max(inc, exc);
+            }
+        }
+        
+        return dp[n][w];
     }
 };
 
