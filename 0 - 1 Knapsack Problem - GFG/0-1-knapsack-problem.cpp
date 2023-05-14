@@ -35,7 +35,7 @@ class Solution
     int knapSack(int w, int wt[], int val[], int n) 
     { 
        // Your code here
-        vector<vector<int>> dp(n+1, vector<int>(w+1, 0));
+        vector<vector<int>> dp(2, vector<int>(w+1, 0));
         for(int i=1; i<=n; i++) {
             
             for(int j=1; j<=w; j++) {
@@ -45,16 +45,16 @@ class Solution
                 
                 if(j - wt[i-1] >= 0) {
                     
-                    inc = dp[i-1][j - wt[i-1]] + val[i-1];    
+                    inc = dp[(i-1)%2][j - wt[i-1]] + val[i-1];    
                 }
                 
-                exc = dp[i-1][j];
+                exc = dp[(i-1)%2][j];
                 
-                dp[i][j] = max(inc, exc);
+                dp[i%2][j] = max(inc, exc);
             }
         }
         
-        return dp[n][w];
+        return dp[n%2][w];
     }
 };
 
