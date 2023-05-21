@@ -10,31 +10,32 @@ using namespace std;
 
 class Solution{
 public:
-    void insertAtBottom(stack<int> &st, int num) {
+
+    void insertAtBottom(stack<int> &St, int temp) {
         
-        if(st.empty()) {
+        if(St.empty()) {
             
-            st.push(num);
+            St.push(temp);
             return;
         }
         
-        int temp = st.top();
-        st.pop();
-        insertAtBottom(st, num);
-        st.push(temp);
+        int tp = St.top();
+        St.pop();
+        insertAtBottom(St, temp);
+        St.push(tp);
     }
     
-    void Reverse(stack<int> &st){
+    void Reverse(stack<int> &St){
         
-        if(st.empty()) {
+        if(St.empty()) {
             
             return;
         }
         
-        int temp = st.top();
-        st.pop();
-        Reverse(st);
-        insertAtBottom(st, temp);
+        int temp = St.top();
+        St.pop();
+        Reverse(St);
+        insertAtBottom(St, temp);
     }
 };
 
