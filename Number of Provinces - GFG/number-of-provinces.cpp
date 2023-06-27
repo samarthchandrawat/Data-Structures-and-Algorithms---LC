@@ -8,49 +8,65 @@ using namespace std;
 
 class Solution {
   public:
-    void dfs(int i, int V, vector<int> &visited, vector<vector<int>> &L) {
+    
+    bool _union(int a, int b, vector<int> &par, vector<int> &rank) {
         
-        if(i>=V)
-            return;
+        int pa = _find(a, par);
+        int pb = _find(b, par);
+        
+        if(pa == pb)
+            return false;
+        
+        if(rank[pa]>rank[pb]) {
             
-        if(visited[i])
-            return;
+            par[pb] = pa;
+            rank[pa]++;
+        } else {
             
-        visited[i] = true;
+            par[pa] = pb;
+            rank[pb]++;
+        }
         
-        for(int nbr: L[i]) 
-            dfs(nbr, V, visited, L);
+        return true;
         
-        return;
+    }
+    
+    int _find(int a, vector<int> &par) {
+        
+        int pa = par[a];
+        while(pa != par[pa]) {
+            
+            par[pa] = par[par[pa]];
+            pa = par[pa];
+        }
+        
+        return pa;
     }
     
     int numProvinces(vector<vector<int>> adj, int V) {
-        // code here
-        vector<vector<int>> L(V);
+        // using union find
+        
+        int comp = V;
+        vector<int> par(V, -1);
+        vector<int> rank(V, 1);
+        
+        for(int i=0; i<V; i++)
+            par[i] = i;
+        
         for(int i=0; i<V; i++) {
             
             for(int j=0; j<V; j++) {
                 
-                if(adj[i][j]==1 && i!=j) {
+                if(i<j && adj[i][j]==1) {
                     
-                    L[i].push_back(j);
+                    if(_union(i, j, par, rank)) {
+                        
+                        comp--;
+                    }
                 }
             }
         }
         
-        int comp = 0;
-        vector<int> visited(V, false);
-        
-        for(int i=0; i<V; i++) {
-                
-            //dfs
-            if(!visited[i]) {
-                
-                comp++;
-                dfs(i, V, visited, L);
-            }
-        }
-            
         return comp;
     }
 };
